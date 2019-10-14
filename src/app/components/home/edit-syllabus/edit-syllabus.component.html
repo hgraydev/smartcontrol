@@ -1,0 +1,150 @@
+<app-header></app-header>
+<section class="sptb">
+  <div class="container">
+    <div class="card mb-0">
+      <!-- title -->
+      <div class="card-header"> 
+        <h3 class="card-title">Editar plan de estudios</h3>
+        <div class="card-options">
+          <a routerLink="/school-syllabus"><i class="fe fe-x btn btn-sm btn-danger"></i></a>
+        </div>
+      </div>
+      <!-- end title -->
+      <!-- from -->
+      <form [formGroup]="templateForm" (ngSubmit)="onSubmit()">
+        <div class="card-body">
+          <div class="border-0">
+            <div class="tab-content">
+              <div class="tab-pane active show userprof-tab" id="tab-10">
+                <div class="row">
+                  <!-- <div class="col-sm-6 col-md-3">
+                    <div class="form-group">
+                      <label class="form-label">Código</label>
+                      <select formControlName="code" [ngClass]="{ 'is-invalid': submitted && f.code.errors }" class="form-control input-sm" (change)="changeEntity($event)">
+                        <option *ngFor="let e of Entities" value="{{e.id}}">{{e.name}}</option>
+                      </select>
+                      <div *ngIf="submitted && f.entity_id.errors" class="invalid-feedback">
+                        <div *ngIf="f.entity_id.errors.required">Este campo es obligatorio.</div>
+                      </div>
+                    </div>
+                  </div> -->
+                  
+                  <div class="col-sm-6 col-md-3">
+                    <div class="form-group">
+                      <label class="form-label">Clave</label>
+                      <input type="text" formControlName="code" 
+                        oninput="this.value = this.value.toUpperCase()" 
+                        class="form-control input-sm capitalize" 
+                        [ngClass]="{ 'is-invalid': submitted && f.code.errors }"
+                        placeholder="Clave">
+                      <div *ngIf="submitted && f.code.errors" class="invalid-feedback">
+                        <div *ngIf="f.code.errors.required">Este campo es obligatorio.</div>
+                        <!-- <div *ngIf="f.code.errors.minlength">Se requiere como mínimo 5 caracteres.</div> -->
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <div class="col-sm-6 col-md-8">
+                    <div class="form-group">
+                      <label class="form-label">name</label>
+                      <input type="text" formControlName="name" 
+                        oninput="this.value = this.value.toUpperCase()" 
+                        class="form-control input-sm capitalize" 
+                        [ngClass]="{ 'is-invalid': submitted && f.name.errors}"
+                        placeholder="Nombre">
+                      <div *ngIf="submitted && f.name.errors" class="invalid-feedback">
+                        <div *ngIf="f.name.errors.required">Este campo es obligatorio.</div>
+                        <div *ngIf="f.name.errors.minlength">Se requiere como mínimo 5 caracteres.</div>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <div class="col-sm-6 col-md-3">
+                    <div class="form-group">
+                      <label class="form-label">Modalidad</label>
+                      <input type="text" formControlName="mode" 
+                        oninput="this.value = this.value.toUpperCase()" 
+                        class="form-control input-sm capitalize" 
+                        [ngClass]="{ 'is-invalid': submitted && f.mode.errors}"
+                        placeholder="Modalidad">
+                      <div *ngIf="submitted && f.mode.errors" class="invalid-feedback">
+                        <div *ngIf="f.mode.errors.required">Este campo es obligatorio.</div>
+                        <!-- <div *ngIf="f.code.errors.minlength">Se requiere como mínimo 5 caracteres.</div> -->
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <div class="col-sm-6 col-md-3">
+                    <div class="form-group">
+                      <label class="form-label">Duración</label>
+                      <input type="text" formControlName="duration" 
+                        oninput="this.value = this.value.toUpperCase()" 
+                        class="form-control input-sm capitalize" 
+                        [ngClass]="{ 'is-invalid': submitted && f.duration.errors}"
+                        placeholder="Duración">
+                      <div *ngIf="submitted && f.duration.errors" class="invalid-feedback">
+                        <div *ngIf="f.duration.errors.required">Este campo es obligatorio.</div>
+                        <!-- <div *ngIf="f.code.errors.minlength">Se requiere como mínimo 5 caracteres.</div> -->
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <div class="col-sm-6 col-md-3">
+                    <div class="form-group">
+                      <label class="form-label">Medida</label>
+                      <input type="text" formControlName="measure" 
+                        oninput="this.value = this.value.toUpperCase()" 
+                        class="form-control input-sm capitalize" 
+                        [ngClass]="{ 'is-invalid': submitted && f.measure.errors}"
+                        placeholder="Semestre, Cuatrimestre, otro">
+                      <div *ngIf="submitted && f.measure.errors" class="invalid-feedback">
+                        <div *ngIf="f.measure.errors.required">Este campo es obligatorio.</div>
+                        <!-- <div *ngIf="f.code.errors.minlength">Se requiere como mínimo 5 caracteres.</div> -->
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-sm-6 col-md-3">
+                    <div class="form-group">
+                      <label class="form-label">No. Medida</label>
+                      <input type="number" formControlName="no_measure" 
+                        oninput="this.value = this.value.toUpperCase()" 
+                        class="form-control input-sm capitalize" 
+                        [ngClass]="{ 'is-invalid': submitted && f.no_measure.errors}"
+                        placeholder="1, 2, 3,....">
+                      <div *ngIf="submitted && f.no_measure.errors" class="invalid-feedback">
+                        <div *ngIf="f.no_measure.errors.required">Este campo es obligatorio.</div>
+                        <!-- <div *ngIf="f.code.errors.minlength">Se requiere como mínimo 5 caracteres.</div> -->
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-sm-8 col-md-8">
+                    <div class="form-group">
+                      <label class="form-label">Antecedentes académicos</label>
+                      <input type="text" formControlName="background" 
+                        oninput="this.value = this.value.toUpperCase()" 
+                        class="form-control input-sm capitalize" 
+                        [ngClass]="{ 'is-invalid': submitted && f.background.errors}"
+                        placeholder="Antecedentes académicos">
+                      <div *ngIf="submitted && f.background.errors" class="invalid-feedback">
+                        <div *ngIf="f.background.errors.required">Este campo es obligatorio.</div>
+                        <!-- <div *ngIf="f.code.errors.minlength">Se requiere como mínimo 5 caracteres.</div> -->
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-12 text-right">
+                    <button type="submit" class="btn btn-primary"> Guardar cambios </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+      <!-- end form -->
+    </div>
+  </div>
+</section>
+
+

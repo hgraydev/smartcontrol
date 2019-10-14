@@ -1,0 +1,83 @@
+<app-header></app-header>
+<section class="sptb">
+    <div class="container">
+        <div class="card">
+            <div class="card-header">
+              <h3 class="card-title">Lista de empleados</h3>
+              <div class="card-options">
+                  <a routerLink="/new-employee" class="btn btn-primary btn-sm">
+                    <i class="fa fa-plus"></i>&nbsp;<strong>Nuevo empleado</strong>
+                  </a>
+                </div>
+            </div>
+            <div class="card-body card-table">
+              <div class="table-responsive table-sm">
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text"><i class="fa fa-search fa-fw"></i></span>
+                    </div>
+                    <input class="form-control input-sm bg-secondary" type="text" [(ngModel)]="searchFilter" autocomplete="off" placeholder="Busca un empleado">
+                  </div>
+                <table class="table table-bordered table-striped table-sm border-top mb-0">
+                  <thead>
+                    <tr>
+                      <td>RFC</td>
+                      <td>Nombre (s)</td>
+                      <td>A. Paterno</td>
+                      <td>A. Materno</td>
+                      <td>Tipo</td>
+                      <td>Estatus</td>
+                      <td>Opciones</td>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor=" let s of Employees | filter:searchFilter | paginate: { itemsPerPage: 5, currentPage: p }; ">
+                      <td>{{ s.rfc }}</td>
+                      <td>{{ s.name }}</td>
+                      <td>{{ s.lastname }}</td>
+                      <td>{{ s.mlastname }} </td>
+                      <td>{{ s.employee_type.description}} </td>
+                      <td><span [ngClass]="(s.status=='Active'?'tag tag-success':'tag')">{{ s.status }} </span></td>
+                      <td>
+                          <span class="options">
+                            <button (click)="deletePeriod(s.uuid)" 
+                              class="btn btn-sm btn-outline-danger">
+                              Eliminar
+                            </button>
+                          </span>
+                          <span class="options" style="margin-right: 5px;">
+                            <a [routerLink]="['/edit-period',s.uuid]" 
+                              class="btn btn-sm btn-outline-primary">
+                            Detalles</a>
+                          </span>
+                          
+                          <span class="options">
+                            <button 
+                              (click)="disablePeriod(s.uuid)" 
+                                class="btn btn-sm btn-outline-warning" *ngIf="s.status=='Active'">
+                              Deshabilitar
+                            </button>
+                            <button 
+                              (click)="enablePeriod(s.uuid)" 
+                                class="btn btn-sm btn-outline-warning" *ngIf="s.status=='Inactive'">
+                              Habilitar
+                            </button>
+                          </span>
+                          <!-- <span class="options"><a [routerLink]="['/syllabus-detail']" [queryParams]="{id: s.uuid}" class="btn btn-sm btn-outline-primary"><i class="fa fa-info"></i></a></span> -->
+                        </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div class="text-right">
+                <pagination-controls 
+                (pageChange)="p = $event"
+                previousLabel="Anterior"
+                nextLabel="Siguiente"
+              >
+              </pagination-controls>
+            </div>
+          </div>
+    </div>
+  </section>

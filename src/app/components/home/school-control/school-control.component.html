@@ -1,0 +1,127 @@
+<app-header></app-header>
+<section class="sptb">
+<div class="container">
+  <div class="card">
+    <div class="card-body card-table" >
+      <form [formGroup]="templateForm" (ngSubmit)="onSubmit()">
+        <div class="form-row">
+
+          <div class="form-group col-md-6">
+            <label for="inputState" class="col-form-label"><strong>Plantel</strong></label>
+            <select formControlName="school_id" 
+              (change)="selectSchool($event)"
+              [ngClass]="{ 'is-invalid': submitted && f.school_id.errors }" 
+                class="form-control input-sm">
+              <!-- <option>SELECCIONAR OPCIÓN</option> -->
+              <option *ngFor=" let sc of Schools" value="{{sc.uuid}}">{{sc.name}}</option>
+            </select>
+            <div *ngIf="submitted && f.school_id.errors" class="invalid-feedback">
+              <div *ngIf="f.school_id.errors.required">Este campo es obligatorio.</div>
+            </div>
+          </div>
+
+          <div class="form-group col-md-4">
+            <label for="inputState" class="col-form-label"><strong>Periodo</strong></label>
+            <select formControlName="period_id" 
+              [ngClass]="{ 'is-invalid': submitted && f.period_id.errors }"
+              (change)="selectPeriod($event)"
+              class="form-control input-sm">
+              <!-- <option>SELECCIONAR OPCIÓN</option>   -->
+              <option *ngFor=" let p of Periods" value="{{ p.uuid }}"> {{ p.description }}</option>
+            </select>
+            <div *ngIf="submitted && f.period_id.errors" class="invalid-feedback">
+                <div *ngIf="f.period_id.errors.required">Este campo es obligatorio.</div>
+              </div>
+          </div>
+
+          <div class="form-group col-md-4">
+            <label for="inputState" class="col-form-label"><strong>Carrera</strong></label>
+            <select formControlName="offer_id" 
+              [ngClass]="{ 'is-invalid': submitted && f.offer_id.errors }"
+              (change)="selectOffer($event)"
+              class="form-control input-sm">
+              <!-- <option>SELECCIONAR OPCIÓN</option>   -->
+              <option *ngFor=" let o of Offers" value="{{ o.uuid }}"> {{ o.description}}</option>
+            </select>
+            <div *ngIf="submitted && f.offer_id.errors" class="invalid-feedback">
+              <div *ngIf="f.offer_id.errors.required">Este campo es obligatorio.</div>
+            </div>
+          </div>
+                    
+          <div class="form-group col-md-2">
+            <label for="inputState" class="col-form-label"><strong>Grupo</strong></label>
+            <select formControlName="group_id" 
+              [ngClass]="{ 'is-invalid': submitted && f.group_id.errors }" 
+                class="form-control input-sm">
+              <!-- <option>SELECCIONAR OPCIÓN</option>   -->
+              <option *ngFor=" let g of Groups" value="{{ g.uuid }}"> {{g.group}}</option>
+            </select>
+            <div *ngIf="submitted && f.group_id.errors" class="invalid-feedback">
+                <div *ngIf="f.group_id.errors.required">Este campo es obligatorio.</div>
+              </div>
+          </div>
+
+                    <div class="form-group col-md-2">
+                      <label for="inputState" class="col-form-label"><strong>&nbsp;</strong></label>
+                      <button type="submit"  class="form-control input-sm btn btn-primary btn-sm">Aplicar filtros</button>
+                    </div>
+
+                  </div>
+                </form>
+              </div>
+
+            <div class="card-header">
+              <h3 class="card-title">Lista de estudiantes</h3>
+              <div class="card-options">
+                  <a routerLink="/new-student" class="btn btn-primary btn-sm">
+                    <i class="fa fa-plus"></i>&nbsp;<strong>Nuevo estudiante</strong>
+                  </a>
+                </div>
+            </div>
+
+            <div class="card-body card-table">
+              <div class="table-responsive table-sm">
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text"><i class="fa fa-search fa-fw"></i></span>
+                    </div>
+                    <input class="form-control input-sm bg-secondary" type="text" [(ngModel)]="searchFilter" autocomplete="off" placeholder="Busca un estudiante">
+                  </div>
+                <table class="table table-bordered table-striped table-sm border-top mb-0">
+                  <thead>
+                    <tr>
+                      <td>No. Control</td>
+                      <td>Nombre (s)</td>
+                      <td>A. Paterno</td>
+                      <td>A. Materno</td>
+                      <td>Opciones</td>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor=" let s of Enrolls | filter:searchFilter | paginate: { itemsPerPage: 5, currentPage: p }; ">
+                      <td>{{ s.student.no_control }}</td>
+                      <td>{{ s.student.firstname }} {{ s.student.secondname }}</td>
+                      <td>{{ s.student.lastname }}</td>
+                      <td>{{ s.student.mlastname }} </td>
+                      <td>
+                        <span class="options"><a routerLink="/new-syllabus" class="btn btn-sm" [ngClass]="(s.status=='Active')?'btn-outline-warning':'btn-outline-secondary'"><i [ngClass]="(s.status=='Active')?'fa fa-chevron-down':'fa fa-chevron-up'"></i></a></span>
+                        <span class="options"><a routerLink="/new-syllabus" class="btn btn-sm btn-outline-primary"><i class="fa fa-edit"></i></a></span>
+                        <span class="options"><a [routerLink]="['/syllabus-detail']" [queryParams]="{id: s.uuid}" class="btn btn-sm btn-outline-primary"><i class="fa fa-info"></i></a></span>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <div class="text-right">
+                <pagination-controls 
+                (pageChange)="p = $event"
+                previousLabel="Anterior"
+                nextLabel="Siguiente"
+              >
+              </pagination-controls>
+            </div>
+          </div>
+    </div>
+  </section>

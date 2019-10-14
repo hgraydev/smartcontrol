@@ -1,0 +1,76 @@
+<app-header></app-header>
+<section class="sptb">
+  <div class="container">
+    <app-header-school></app-header-school>
+    <div class="card">
+      <!-- title -->
+      <div class="card-header">
+        <h3 class="card-title">Niveles académicos</h3>
+        <div class="card-options">
+          <a [routerLink]="['/new-school-level']" class="btn btn-primary btn-sm">
+            <i class="fa fa-plus"></i>&nbsp;<strong>Nuevo nivel académico</strong>
+          </a>
+        </div>
+      </div>
+      <!-- end title -->
+      <div class="card-body card-table">
+        <div class="table-responsive table-sm">
+          <!-- search -->
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text"><i class="fa fa-search fa-fw"></i></span>
+            </div>
+            <input class="form-control input-sm bg-secondary" type="text" [(ngModel)]="searchFilter" autocomplete="off" placeholder="Busca por descripción">
+          </div>
+          <!-- end search -->
+          <!-- list objects -->
+          <table class="table table-bordered table-striped table-sm border-top mb-0">
+            <thead>
+              <tr>
+                <td>Descripción</td>
+                <td>Opciones</td>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor=" let o of Levels | filter:searchFilter | paginate: { itemsPerPage: 10, currentPage: p }; ">
+                <td>{{ o.description}} </td>
+                <td>
+                  <span class="options">
+                    <button (click)="deleteSchoolLevel(o.uuid)" class="btn btn-sm btn-outline-danger">
+                      Eliminar
+                    </button>
+                  </span>
+                  
+                  <span class="options">
+                    <a [routerLink]="['/edit-school-level', o.uuid]" class="btn btn-sm btn-outline-primary">
+                      Editar
+                    </a>
+                  </span>
+
+                  <!-- <span class="options">
+                    <a routerLink="/new-syllabus" 
+                      class="btn btn-sm" 
+                      [ngClass]="(s.status=='Active')?'btn-outline-warning':'btn-outline-secondary'">
+                        {{(s.status=='Active')?'Deshabilitar':'Habilitar'}}
+                    </a>
+                  </span> -->
+
+                </td>
+              </tr>
+            </tbody>
+          </table>
+                <!-- end list objects -->
+        </div>
+      </div>
+      <!-- pagination -->
+      <div class="text-right">
+        <pagination-controls 
+          (pageChange)="p = $event"
+          previousLabel="Anterior"
+          nextLabel="Siguiente"
+        ></pagination-controls>
+      </div>
+      <!-- end pagination -->
+    </div>
+  </div>
+</section>

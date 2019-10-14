@@ -1,0 +1,13 @@
+
+<div class="panel panel-primary">
+    <div>
+      <div class="user-tabs mb-4">
+        <!-- Tabs -->
+        <ul class="nav panel-tabs">
+          <li><a routerLink="/period" [ngClass]="(__periodSegmentFlag)?'active':''" data-toggle="tab">Periodo escolares</a></li>
+          <li><a routerLink="/period-group" [ngClass]="(__periodGroupSegmentFlag)?'active':''" data-toggle="tab">Grupos</a></li>
+          <li><a routerLink="/period-score" [ngClass]="(__periodScoreSegmentFlag)?'active':''" data-toggle="tab">Captura de calificaciones</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>

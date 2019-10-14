@@ -1,0 +1,14 @@
+
+<div class="panel panel-primary">
+    <div>
+      <div class="user-tabs mb-4">
+        <!-- Tabs -->
+        <ul class="nav panel-tabs">
+          <li><a routerLink="/period" [ngClass]="(__periodSegmentFlag)?'active':''" data-toggle="tab">Datos generales</a></li>
+          <li><a routerLink="/period-group" [ngClass]="(__periodGroupSegmentFlag)?'active':''" data-toggle="tab">Domicilio</a></li>
+          <li><a routerLink="/period-score" [ngClass]="(__periodScoreSegmentFlag)?'active':''" data-toggle="tab">Padre/tutor</a></li>
+          <li><a routerLink="/period-score" [ngClass]="(__periodScoreSegmentFlag)?'active':''" data-toggle="tab">Historial</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>

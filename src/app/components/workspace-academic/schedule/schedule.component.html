@@ -1,0 +1,44 @@
+<app-header-academic></app-header-academic>
+<section class="sptb">
+    <div class="container">
+        <div class="card">
+            <div class="card-header">
+              <h3 class="card-title">Horario de clases</h3>
+            </div>
+            <div class="card-body card-table">
+              <div class="table-responsive table-sm">
+                <table class="table table-bordered table-striped table-sm border-top mb-0">
+                  <thead>
+                    <tr>
+                      <td>Clave</td>
+                      <td>Materia</td>
+                      <td>Lun</td>
+                      <td>Mar</td>
+                      <td>Mie</td>
+                      <td>Jue</td>
+                      <td>Vie</td>
+                      <td>Sab</td>
+                      <td>Dom</td>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <!-- <tr *ngFor=" let s of Periods | filter:searchFilter | paginate: { itemsPerPage: 5, currentPage: p }; "> -->
+                    <tr *ngFor=" let s of Schedules">
+                      <td>{{ s.code }}</td>
+                      <td>{{ s.name }}</td>
+                      <td>{{ orderSchedules(s.schedules, 'LUNES') }}</td>
+                      <td>{{ orderSchedules(s.schedules, 'MARTES') }}</td>
+                      <td>{{ orderSchedules(s.schedules, 'MIERCOLES') }}</td>
+                      <td>{{ orderSchedules(s.schedules, 'JUEVES') }}</td>
+                      <td>{{ orderSchedules(s.schedules, 'VIERNES') }}</td>
+                      <td>{{ orderSchedules(s.schedules, 'SABADO') }}</td>
+                      <td>{{ orderSchedules(s.schedules, 'DOMINGO') }}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+    </div>
+  </section>
+

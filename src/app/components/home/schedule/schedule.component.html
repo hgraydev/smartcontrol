@@ -1,0 +1,139 @@
+<app-header></app-header>
+<section class="sptb">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <!-- <app-header-period></app-header-period> -->
+          <div class="card">
+              <div class="card-body card-table">
+                <div class="row">
+                  
+                  <div class="col-sm-6 col-md-4">
+                    <div class="form-group">
+                      <label class="form-label">Oferta académica</label>
+                      <input type="text"  value="{{Group.offer.description}}"
+                        oninput="this.value = this.value.toUpperCase()" 
+                        class="form-control input-sm capitalize" 
+                        placeholder="Oferta académica" readonly>
+                    </div>
+                  </div>
+
+                  <div class="col-sm-3 col-md-3">
+                    <div class="form-group">
+                      <label class="form-label">Turno</label>
+                      <input type="text"  value="{{Group.offer.school_shift.description}}"
+                        oninput="this.value = this.value.toUpperCase()" 
+                        class="form-control input-sm capitalize" 
+                        placeholder="Turno" readonly>
+                    </div>
+                  </div>
+
+                  <div class="col-sm-2 col-md-2">
+                    <div class="form-group">
+                      <label class="form-label">Grado</label>
+                      <input type="text" value="{{Group.grade}}"
+                        oninput="this.value = this.value.toUpperCase()" 
+                        class="form-control input-sm capitalize" 
+                        placeholder="Grado" readonly>
+                    </div>
+                  </div>
+
+                  <div class="col-sm-2 col-md-2">
+                    <div class="form-group">
+                      <label class="form-label">Grupo</label>
+                      <input type="text"   value="{{Group.group}}"
+                        oninput="this.value = this.value.toUpperCase()" 
+                        class="form-control input-sm capitalize" 
+                        placeholder="Grupo" readonly>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+
+              <div class="card-header">
+                <h3 class="card-title">Horario</h3>
+                <div class="card-options">
+                    <a routerLink="/new-subject-schedule/{{_GroupId}}" class="btn btn-primary btn-sm">
+                      <i class="fa fa-plus"></i>&nbsp;<strong>Agregar materia</strong>
+                    </a>
+                    <a routerLink="/period-group"><i class="fe fe-x btn btn-sm btn-danger"></i></a>
+                  </div>
+              </div>
+              <div class="card-body card-table">
+                <div class="table-responsive table-sm">
+                  <div class="input-group mb-3">
+                    <!-- <div class="input-group-prepend">
+                      <span class="input-group-text"><i class="fa fa-search fa-fw"></i></span>
+                    </div>
+                    <input class="form-control input-sm bg-secondary" 
+                      type="text" [(ngModel)]="searchFilter" autocomplete="off" 
+                      placeholder="Busca por oferta, turno, periodo, grado o grupo"> -->
+
+                     
+                  </div>
+                  <table class="table table-bordered table-striped table-sm border-top mb-0">
+                    <thead>
+                      <tr>
+                        <td>Clave</td>
+                        <td>Materia</td>
+                        <td>Lun</td>
+                        <td>Mar</td>
+                        <td>Mie</td>
+                        <td>Jue</td>
+                        <td>Vie</td>
+                        <td>Sab</td>
+                        <td>Dom</td>
+                        <td>Docente</td>
+                        <td>Opciones</td>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr class="schedule-row" *ngFor=" let s of Schedule | filter:searchFilter | paginate: { itemsPerPage: 5, currentPage: p }; ">
+                        <td>{{s.code}}</td>
+                        <td>{{s.name}}</td>
+                        <td>{{ orderSchedules(s.schedules, 'LUNES') }}</td>
+                        <td>{{ orderSchedules(s.schedules, 'MARTES') }}</td>
+                        <td>{{ orderSchedules(s.schedules, 'MIERCOLES') }}</td>
+                        <td>{{ orderSchedules(s.schedules, 'JUEVES') }}</td>
+                        <td>{{ orderSchedules(s.schedules, 'VIERNES') }}</td>
+                        <td>{{ orderSchedules(s.schedules, 'SABADO') }}</td>
+                        <td>{{ orderSchedules(s.schedules, 'DOMINGO') }}</td>
+                        <td>{{s.schedules[0].employee.name}} {{s.schedules[0].employee.lastname}} {{s.schedules[0].employee.mlastname }}</td>
+                        <td>
+                          <span class="options btn-options">
+                            <button 
+                              (click)="deleteSchedule(s.uuid)" 
+                              class="btn btn-sm btn-outline-danger">
+                              <!-- Eliminar -->
+                              <i class="fa fa-trash"></i>
+                            </button>
+                          </span>
+                          <!-- <span class="options btn-options">
+                            <a 
+                              [routerLink]="['/schedule', g.uuid]"
+                              class="btn btn-sm btn-outline-primary">
+                              Horario 
+                            </a>
+                          </span> -->
+                          <!-- <span class="options"><a [routerLink]="['/syllabus-detail']" [queryParams]="{id: s.uuid}" class="btn btn-sm btn-outline-primary"><i class="fa fa-info"></i></a></span> -->
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <div class="text-right">
+                  <pagination-controls 
+                  (pageChange)="p = $event"
+                  previousLabel="Anterior"
+                  nextLabel="Siguiente"
+                >
+                </pagination-controls>
+              </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+</section>

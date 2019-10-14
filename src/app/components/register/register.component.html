@@ -1,0 +1,66 @@
+		<!--Page-->
+		<div class="page ">
+        <div class="page-content z-index-10">
+          <div class="container">
+            <div class="row">
+              <div class="col-xl-4 col-md-12 col-md-12 d-block mx-auto">
+                <div class="card mb-xl-0">
+                  <div class="card-header">
+                    <h3 class="card-title">Crear una cuenta</h3>
+                  </div>
+                  
+                  <div class="card-body">
+                      <form [formGroup]="templateForm" (ngSubmit)="onSubmit()">
+                        <div class="form-group">
+                          <label class="form-label text-dark">Correo electrónico</label>
+                          <input type="text" 
+                            formControlName="email" 
+                            class="form-control input-sm" 
+                            [ngClass]="{ 'is-invalid': submitted && f.email.errors }"
+                            placeholder="usuario@dominio.com" />
+                          <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+                            <div *ngIf="f.email.errors.required">El correo eletrónico es necesario.</div>
+                            <div *ngIf="f.email.errors.email">Debe ser un correo electrónico válido.</div>
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <label class="form-label text-dark">Contraseña</label>
+                          <input type="password" formControlName="password" class="form-control input-sm" [ngClass]="{ 'is-invalid': submitted && f.password.errors }"  placeholder="Contraseña">
+                          <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+                            <div *ngIf="f.password.errors.required">La contraseña es necesaria.</div>
+                            <div *ngIf="f.password.errors.minlength">La contraseña debe tener entre 8 y 15 caracteres, con al menos una mayúscula y un número.</div>
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <label class="form-label text-dark">Confirmar contraseña</label>
+                          <input type="password" formControlName="confirm_password" class="form-control input-sm" [ngClass]="{ 'is-invalid': submitted && f.confirm_password.errors }"  placeholder="Confirmar contraseña">
+                          <div *ngIf="submitted && f.confirm_password.errors" class="invalid-feedback">
+                            <div *ngIf="f.confirm_password.errors.required">La confirmación de la contraseña es necesaria.</div>
+                            <div *ngIf="f.confirm_password.errors.minlength">La confirmación debe tener entre 8 y 15 caracteres, con al menos una mayúscula y un número</div>
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <label class="custom-control custom-checkbox">
+                            <input type="checkbox" formControlName="terms" class="custom-control-input" [ngClass]="{ 'is-invalid': submitted && f.terms.errors }">
+                            <span class="custom-control-label text-dark">Acepto los<a href="terms.html">Términos y Condiciones</a></span>
+                            <div *ngIf="submitted && f.terms.errors" class="invalid-feedback">
+                              <div *ngIf="f.terms.errors.required">Debes aceptar los términos y condiciones.</div>
+                            </div>
+                          </label>
+                        </div>
+                        <div class="form-footer mt-2">
+                          <input type="submit" value="Crear Nueva Cuenta" class="btn btn-primary btn-block">
+                        </div>
+                        <div class="text-center  mt-3 text-dark">
+                          !Ya tengo una cuenta¡ <a routerLink="/login">Inicia sesión</a>
+                        </div>
+                      </form>
+                    </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+  

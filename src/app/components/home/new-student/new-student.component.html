@@ -1,0 +1,152 @@
+<app-header></app-header>
+<section class="sptb">
+  <div class="container">
+    <div class="card mb-0">
+      <!-- title -->
+      <div class="card-header"> 
+        <h3 class="card-title">Nuevo estudiante</h3>
+        <div class="card-options">
+          <a routerLink="/employee"><i class="fe fe-x btn btn-sm btn-danger"></i></a>
+        </div>
+      </div>
+      <!-- end title -->
+      <!-- from -->
+      <form [formGroup]="templateForm" (ngSubmit)="onSubmit()">
+        <div class="card-body">
+          <div class="border-0">
+            <div class="tab-content">
+              <div class="tab-pane active show userprof-tab" id="tab-10">
+                <div class="row">
+                  
+                  <div class="col-sm-4 col-md-3">
+                    <div class="form-group">
+                      <label class="form-label">CURP</label>
+                      <input type="text" formControlName="curp" 
+                        oninput="this.value = this.value.toUpperCase()" 
+                        class="form-control input-sm capitalize" 
+                        [ngClass]="{'is-invalid': submitted && f.curp.errors }"
+                        placeholder="CURP">
+                        <div *ngIf="submitted && f.curp.errors" class="invalid-feedback">
+                          <div *ngIf="f.curp.errors.required">Este campo es obligatorio.</div>
+                          <div *ngIf="f.curp.errors.minlength">Se requiere como mínimo 18 caracteres.</div>
+                        </div>
+                    </div>
+                  </div>
+  
+                  <div class="col-sm-4 col-md-3">
+                    <div class="form-group">
+                      <label class="form-label">Nombre(s)</label>
+                      <input type="text" formControlName="name" 
+                        oninput="this.value = this.value.toUpperCase()" 
+                        class="form-control input-sm capitalize" 
+                        [ngClass]="{'is-invalid': submitted && f.name.errors }"
+                        placeholder="Nombre(s)">
+                        <div *ngIf="submitted && f.name.errors" class="invalid-feedback">
+                          <div *ngIf="f.name.errors.required">Este campo es obligatorio.</div>
+                          <div *ngIf="f.name.errors.minlength">Se requiere como mínimo 3 caracteres.</div>
+                        </div>
+                    </div>
+                  </div>
+
+                  <div class="col-sm-4 col-md-3">
+                    <div class="form-group">
+                      <label class="form-label">A. Paterno</label>
+                      <input type="text" formControlName="lastname" 
+                        oninput="this.value = this.value.toUpperCase()" 
+                        class="form-control input-sm capitalize" 
+                        [ngClass]="{'is-invalid': submitted && f.lastname.errors }"
+                        placeholder="A. Paterno">
+                        <div *ngIf="submitted && f.lastname.errors" class="invalid-feedback">
+                          <div *ngIf="f.lastname.errors.required">Este campo es obligatorio.</div>
+                          <div *ngIf="f.lastname.errors.minlength">Se requiere como mínimo 3 caracteres.</div>
+                        </div>
+                    </div>
+                  </div>
+                    
+                  <div class="col-sm-4 col-md-3">
+                    <div class="form-group">
+                      <label class="form-label">A. Materno</label>
+                      <input type="text" formControlName="mlastname" 
+                        oninput="this.value = this.value.toUpperCase()" 
+                        class="form-control input-sm capitalize" 
+                        [ngClass]="{'is-invalid': submitted && f.mlastname.errors }"
+                        placeholder="A. Materno">
+                        <div *ngIf="submitted && f.mlastname.errors" class="invalid-feedback">
+                          <div *ngIf="f.mlastname.errors.required">Este campo es obligatorio.</div>
+                          <div *ngIf="f.mlastname.errors.minlength">Se requiere como mínimo 3 caracteres.</div>
+                        </div>
+                    </div>
+                  </div>
+                    
+                  <div class="col-sm-3 col-md-2">
+                    <div class="form-group">
+                      <label class="form-label">Fecha de nacimiento</label>
+                      <input type="date" formControlName="birthday" 
+                        oninput="this.value = this.value.toUpperCase()"
+                        [ngClass]="{'is-invalid': submitted && f.birthday.errors }" 
+                        class="form-control input-sm capitalize" 
+                      >
+                        <div *ngIf="submitted && f.birthday.errors" class="invalid-feedback">
+                          <div *ngIf="f.birthday.errors.required">Este campo es obligatorio.</div>
+                        </div>
+                    </div>
+                  </div>
+
+                  <div class="col-sm-3 col-md-2">
+                    <div class="form-group">
+                      <label class="form-label">Genero</label>
+                      <select formControlName="gender" 
+                        class="form-control input-sm"
+                        [ngClass]="{'is-invalid': submitted && f.gender.errors }"
+                        >
+                        <option value="Masculino">Masculino</option>
+                        <option value="Femenino">Femenino</option>
+                      </select>
+                      <div *ngIf="submitted && f.gender.errors" class="invalid-feedback">
+                        <div *ngIf="f.gender.errors.required">Este campo es obligatorio.</div>
+                      </div>
+                    </div>
+                  </div>
+                    
+                  <div class="col-sm-3 col-md-2">
+                    <div class="form-group">
+                      <label class="form-label">No. Celular</label>
+                      <input type="text" formControlName="cellphone" 
+                        oninput="this.value = this.value.toUpperCase()" 
+                        class="form-control input-sm capitalize" 
+                        placeholder="000-000-0000">
+                        <!-- <div *ngIf="submitted && f.description.errors" class="invalid-feedback">
+                          <div *ngIf="f.description.errors.required">Este campo es obligatorio.</div>
+                          <div *ngIf="f.description.errors.minlength">Se requiere como mínimo 10 caracteres.</div>
+                        </div> -->
+                    </div>
+                  </div>
+
+                  <div class="col-sm-3 col-md-4">
+                    <div class="form-group">
+                      <label class="form-label">Correo electrónico</label>
+                      <input type="text" formControlName="email"  
+                        class="form-control input-sm capitalize"
+                        [ngClass]="{'is-invalid': submitted && f.email.errors }"
+                        placeholder="Correo electrónico">
+                        <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+                          <div *ngIf="f.email.errors.required">Este campo es obligatorio.</div>
+                          <div *ngIf="f.email.errors.email">Formato de correo electrónico invalido.</div>
+                        </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-12 text-right">
+                    <button type="submit" class="btn btn-primary"> Guardar registro </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+        <!-- end form -->
+    </div>
+  </div>
+</section>

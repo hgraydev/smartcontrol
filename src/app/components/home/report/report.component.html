@@ -1,0 +1,92 @@
+<app-header></app-header>
+<section class="sptb">
+    <div class="container">
+        <div class="card">
+            <div class="card-body card-table" >
+                <form [formGroup]="templateForm" (ngSubmit)="onSubmit()">
+                  <div class="form-row">
+                    <div class="form-group col-md-3">
+                      <label for="inputState" class="col-form-label"><strong>Ciclo escolar</strong></label>
+                      <input type="text" class="form-control input-sm" value="{{Filters[0].description}}" disabled>
+                    </div>
+                    <div class="form-group col-md-4">
+                      <label for="inputState" class="col-form-label"><strong>Carrera</strong></label>
+                      <!-- <select id="inputState" class="form-control input-sm">
+                        <option *ngFor=" let s of Filters[0].offers" value="{{ s.uuid }}"> {{ s.grade }} - {{ s.grupo }} - {{ s.syllabus.name }}</option>
+                      </select> -->
+                      <select formControlName="filter" [ngClass]="{ 'is-invalid': submitted && f.filter.errors }" class="form-control input-sm">
+                        <option>SELECCIONAR OPCIÓN</option>  
+                        <option *ngFor=" let s of Filters[0].offers" value="{{ s.uuid }}"> {{ s.grade }} - {{ s.grupo }} - {{ s.syllabus.name }}</option>
+                      </select>
+                      <div *ngIf="submitted && f.filter.errors" class="invalid-feedback">
+                          <div *ngIf="f.filter.errors.required">Este campo es obligatorio.</div>
+                        </div>
+                    </div>
+                    <div class="form-group col-md-2">
+                        <label for="inputState" class="col-form-label"><strong>Reporte</strong></label>
+                        <select [ngClass]="{ 'is-invalid': submitted && f.filter.errors }" class="form-control input-sm">
+                          <option>Boleta</option>
+                          <option>Kardex</option>
+                          <option>Constancia</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-2">
+                      <label for="inputState" class="col-form-label"><strong>&nbsp;</strong></label>
+                      <button type="submit"  class="form-control input-sm btn btn-primary btn-sm">Aplicar filtros</button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            <div class="card-header">
+              <h3 class="card-title">Generación de reportes</h3>
+              <div class="card-options">
+                  <a routerLink="/new-syllabus" class="btn btn-primary btn-sm">
+                    <i class="fa fa-print"></i>&nbsp;<strong>Generar todos</strong>
+                  </a>
+                </div>
+            </div>
+            <div class="card-body card-table">
+              <div class="table-responsive table-sm">
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text"><i class="fa fa-search fa-fw"></i></span>
+                    </div>
+                    <input class="form-control input-sm bg-secondary" type="text" [(ngModel)]="searchFilter" autocomplete="off" placeholder="Busca un estudiante">
+                  </div>
+                <table class="table table-bordered table-striped table-sm border-top mb-0">
+                  <thead>
+                    <tr>
+                      <td>No. Control</td>
+                      <td>Nombre (s)</td>
+                      <td>A. Paterno</td>
+                      <td>A. Materno</td>
+                      <td>Opciones</td>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor=" let s of Enrolls | filter:searchFilter | paginate: { itemsPerPage: 5, currentPage: p }; ">
+                      <td>{{ s.student.no_control }}</td>
+                      <td>{{ s.student.firstname }} {{ s.student.secondname }}</td>
+                      <td>{{ s.student.lastname }}</td>
+                      <td>{{ s.student.mlastname }} </td>
+                      <td>
+                        <!-- <span class="options"><a routerLink="/new-syllabus" class="btn btn-sm" [ngClass]="(s.status=='Active')?'btn-outline-warning':'btn-outline-secondary'"><i [ngClass]="(s.status=='Active')?'fa fa-chevron-down':'fa fa-chevron-up'"></i></a></span>
+                        <span class="options"><a routerLink="/new-syllabus" class="btn btn-sm btn-outline-primary"><i class="fa fa-edit"></i></a></span> -->
+                        <span class="options"><a [routerLink]="['/syllabus-detail']" [queryParams]="{id: s.uuid}" class="btn btn-sm btn-outline-primary"><i class="fa fa-print"></i></a></span>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div class="text-right">
+                <pagination-controls 
+                (pageChange)="p = $event"
+                previousLabel="Anterior"
+                nextLabel="Siguiente"
+              >
+              </pagination-controls>
+            </div>
+          </div>
+    </div>
+  </section>

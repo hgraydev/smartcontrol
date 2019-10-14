@@ -1,0 +1,76 @@
+<app-header></app-header>
+<section class="sptb">
+  <div class="container">
+    <div class="card mb-0">
+      <!-- title -->
+      <div class="card-header"> 
+        <h3 class="card-title">Editar periodo escolar</h3>
+        <div class="card-options">
+          <a routerLink="/period"><i class="fe fe-x btn btn-sm btn-danger"></i></a>
+        </div>
+      </div>
+      <!-- end title -->
+      <!-- from -->
+      <form [formGroup]="templateForm" (ngSubmit)="onSubmit()">
+        <div class="card-body">
+          <div class="border-0">
+            <div class="tab-content">
+              <div class="tab-pane active show userprof-tab" id="tab-10">
+                <div class="row">
+                  <div class="col-sm-6 col-md-4">
+                    <div class="form-group">
+                      <label class="form-label">Descripción</label>
+                      <input type="text" formControlName="description" 
+                        oninput="this.value = this.value.toUpperCase()" 
+                        class="form-control input-sm capitalize" 
+                        [ngClass]="{'is-invalid': submitted && f.description.errors }"
+                        placeholder="Descripción">
+                        <div *ngIf="submitted && f.description.errors" class="invalid-feedback">
+                          <div *ngIf="f.description.errors.required">Este campo es obligatorio.</div>
+                          <div *ngIf="f.description.errors.minlength">Se requiere como mínimo 5 caracteres.</div>
+                        </div>
+                    </div>
+                  </div>
+
+                  <div class="col-sm-4 col-md-2">
+                    <div class="form-group">
+                      <label class="form-label">Fecha de inicio</label>
+                      <input type="date" formControlName="start" 
+                        oninput="this.value = this.value.toUpperCase()" 
+                        class="form-control input-sm capitalize" 
+                        [ngClass]="{'is-invalid': submitted && f.description.errors }"
+                      >
+                        <div *ngIf="submitted && f.description.errors" class="invalid-feedback">
+                          <div *ngIf="f.description.errors.required">Este campo es obligatorio.</div>
+                        </div>
+                    </div>
+                  </div>
+
+                  <div class="col-sm-4 col-md-2">
+                    <div class="form-group">
+                      <label class="form-label">Fecha de finalización</label>
+                      <input type="date" formControlName="ends" 
+                        oninput="this.value = this.value.toUpperCase()" 
+                        class="form-control input-sm capitalize" 
+                        [ngClass]="{'is-invalid': submitted && f.description.errors }"
+                      >
+                        <div *ngIf="submitted && f.description.errors" class="invalid-feedback">
+                          <div *ngIf="f.description.errors.required">Este campo es obligatorio.</div>
+                        </div>
+                    </div>
+                  </div>
+                  <div class="col-md-12 text-right">
+                    <button type="submit" class="btn btn-primary"> Guardar cambios </button>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+        <!-- end form -->
+    </div>
+  </div>
+</section>
+

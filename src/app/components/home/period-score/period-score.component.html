@@ -1,0 +1,74 @@
+<app-header></app-header>
+<section class="sptb">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <app-header-period></app-header-period>
+          <div class="card">
+              <div class="card-header">
+                <h3 class="card-title">Lista periodos de captura de calificaciones</h3>
+                <div class="card-options">
+                    <a routerLink="/new-period-score" class="btn btn-primary btn-sm">
+                      <i class="fa fa-plus"></i>&nbsp;<strong>Nuevo periodo de captura</strong>
+                    </a>
+                  </div>
+              </div>
+              <div class="card-body card-table">
+                <div class="table-responsive table-sm">
+                  <div class="input-group mb-3">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="fa fa-search fa-fw"></i></span>
+                      </div>
+                      <input class="form-control input-sm bg-secondary" type="text" [(ngModel)]="searchFilter" autocomplete="off" placeholder="Busca por descripción, fecha o estatus">
+                    </div>
+                  <table class="table table-bordered table-striped table-sm border-top mb-0">
+                    <thead>
+                      <tr>
+                        <td>Descripción</td>
+                        <td>Inicia</td>
+                        <td>Finaliza</td>
+                        <td>Status</td>
+                        <td>Opciones</td>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor=" let s of Periods | filter:searchFilter | paginate: { itemsPerPage: 5, currentPage: p }; ">
+                        <td>{{ s.description }}</td>
+                        <td>{{ s.start }}</td>
+                        <td>{{ s.ends }}</td>
+                        <td><span [ngClass]="(s.status=='Active'?'tag tag-success':'tag')">{{ s.status }} </span></td>
+                        <td>
+                          
+                          <span class="options"><a routerLink="/new-syllabus" class="btn btn-sm btn-outline-primary">
+                            <!-- <i class="fa fa-edit"></i> -->
+                            Editar</a></span>
+                          <span class="options"><a routerLink="/new-syllabus" class="btn btn-sm btn-outline-primary">
+                            <!-- <i class="fa fa-list"></i> -->
+                            Detalles</a></span>
+                          <span class="options">
+                              <a routerLink="/new-syllabus" class="btn btn-sm" [ngClass]="(s.status=='Active')?'btn-outline-warning':'btn-outline-secondary'">
+                                <!-- <i [ngClass]="(s.status=='Active')?'fa fa-chevron-down':'fa fa-chevron-up'"></i> -->
+                                {{(s.status=='Active')?'Desactivar':'Activar'}}
+                              </a>
+                            </span>
+                          <!-- <span class="options"><a [routerLink]="['/syllabus-detail']" [queryParams]="{id: s.uuid}" class="btn btn-sm btn-outline-primary"><i class="fa fa-info"></i></a></span> -->
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <div class="text-right">
+                  <pagination-controls 
+                  (pageChange)="p = $event"
+                  previousLabel="Anterior"
+                  nextLabel="Siguiente"
+                >
+                </pagination-controls>
+              </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+</section>

@@ -1,0 +1,96 @@
+<app-header></app-header>
+<section class="sptb">
+  <div class="container">
+    <div class="row ">
+      <div class="col-lg-12">
+        <div class="card mb-0">
+          <div class="card-header"> 
+            <h3 class="card-title">Nuevo grupo</h3>
+            <div class="card-options">
+              <a routerLink="/period-group"><i class="fe fe-x btn btn-sm btn-danger"></i></a>
+            </div>
+          </div>
+          <form [formGroup]="templateForm" (ngSubmit)="onSubmit()">
+            <div class="card-body">
+              <div class="border-0">
+                <div class="tab-content">
+                  <div class="tab-pane active show userprof-tab" id="tab-10">
+                    <div class="row">
+
+                      <div class="col-sm-6 col-md-3">
+                          <div class="form-group">
+                            <label class="form-label">Plantel</label>
+                            <select formControlName="school_id" [ngClass]="{ 'is-invalid': submitted && f.school_id.errors }" class="form-control input-sm">
+                              <option *ngFor="let s of Schools" value="{{s.uuid}}">{{s.name}}</option>
+                            </select>
+                            <div *ngIf="submitted && f.school_id.errors" class="invalid-feedback">
+                              <div *ngIf="f.school_id.errors.required">Este campo es obligatorio.</div>
+                            </div>
+                          </div>
+                        </div>  
+
+                        <div class="col-sm-6 col-md-3">
+                          <div class="form-group">
+                            <label class="form-label">Periodo escolar</label>
+                            <select formControlName="period_id" [ngClass]="{ 'is-invalid': submitted && f.period_id.errors }" class="form-control input-sm">
+                              <option *ngFor="let p of Periods" value="{{p.uuid}}">{{p.description}}</option>
+                            </select>
+                            <div *ngIf="submitted && f.period_id.errors" class="invalid-feedback">
+                              <div *ngIf="f.period_id.errors.required">Este campo es obligatorio.</div>
+                            </div>
+                          </div>
+                        </div>
+
+
+                        <div class="col-sm-6 col-md-6">
+                          <div class="form-group">
+                            <label class="form-label">Oferta académica</label>
+                            <select formControlName="offer_id" [ngClass]="{ 'is-invalid': submitted && f.offer_id.errors }" class="form-control input-sm">
+                              <option *ngFor="let o of Offers" value="{{o.uuid}}">{{o.description}} - {{o.school_shift.description}}</option>
+                            </select>
+                            <div *ngIf="submitted && f.offer_id.errors" class="invalid-feedback">
+                              <div *ngIf="f.offer_id.errors.required">Este campo es obligatorio.</div>
+                            </div>
+                          </div>
+                        </div>
+
+                          <div class="col-sm-2 col-md-1">
+                            <div class="form-group">
+                              <label class="form-label">Grado</label>
+                              <input type="number" min="1" formControlName="grade" 
+                                oninput="this.value = this.value.toUpperCase()" 
+                                class="form-control input-sm capitalize" 
+                                [ngClass]="{ 'is-invalid': submitted && f.grade.errors}"
+                                placeholder="1,2,3....">
+                                <div *ngIf="submitted && f.grade.errors" class="invalid-feedback">
+                                  <div *ngIf="f.grade.errors.required">Este campo es obligatorio.</div>
+                                </div>
+                            </div>
+                          </div>
+                          <div class="col-sm-2 col-md-1">
+                              <div class="form-group">
+                                <label class="form-label">Grupo</label>
+                                <input type="text" formControlName="group" 
+                                  oninput="this.value = this.value.toUpperCase()" 
+                                  class="form-control input-sm capitalize" 
+                                  [ngClass]="{ 'is-invalid': submitted && f.group.errors}"
+                                  placeholder="grupo">
+                                  <div *ngIf="submitted && f.group.errors" class="invalid-feedback">
+                                    <div *ngIf="f.group.errors.required">Este campo es obligatorio.</div>
+                                  </div>
+                              </div>
+                            </div>
+                        <div class="col-md-12 text-right">
+                          <button type="submit" class="btn btn-primary"> Guardar registro </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

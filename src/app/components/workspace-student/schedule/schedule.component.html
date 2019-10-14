@@ -1,0 +1,37 @@
+<app-header-student></app-header-student>
+<section class="sptb">
+    <div class="container">
+        <div class="card">
+            <div class="card-header">
+              <h3 class="card-title">Horario de clases</h3>
+            </div>
+            <div class="card-body card-table">
+              <div class="table-responsive table-sm">
+                <table class="table table-bordered table-striped table-sm border-top mb-0">
+                  <thead>
+                    <tr>
+                      <td class="td-header">Clave</td>
+                      <td class="td-header">Materia</td>
+                      <td class="td-header">Dia</td>
+                      <td class="td-header">Hora Inicio</td>
+                      <td class="td-header">Hora Finalización</td>
+                      <td class="td-header">Docente</td>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <!-- <tr *ngFor=" let s of Periods | filter:searchFilter | paginate: { itemsPerPage: 5, currentPage: p }; "> -->
+                    <tr *ngFor=" let s of Schedules">
+                      <td>{{s.subject.code}}</td>
+                      <td>{{s.subject.name}}</td>
+                      <td>{{s.day}}</td>
+                      <td>{{s.start}}</td>
+                      <td>{{s.end}}</td>
+                      <td>{{s.employee.firstname}} {{s.employee.secondname}} {{s.employee.lastname}} {{s.employee.mlastname}}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+    </div>
+  </section>

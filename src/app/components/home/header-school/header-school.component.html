@@ -1,0 +1,15 @@
+
+<div class="panel panel-primary">
+    <div>
+      <div class="user-tabs mb-4">
+        <!-- Tabs -->
+        <ul class="nav panel-tabs">
+          <li><a routerLink="/school" [ngClass]="(__schoolSegmentFlag)?'active':''" data-toggle="tab">General</a></li>
+          <li><a routerLink="/academic-offer" [ngClass]="(__offerSegmentFlag)?'active':''" data-toggle="tab">Oferta académica</a></li>
+          <li><a routerLink="/school-syllabus" [ngClass]="(__syllabusSegmentFlag)?'active':''" data-toggle="tab">Plan de estudios</a></li>
+          <li><a routerLink="/school-level" [ngClass]="(__levelSegmentFlag)?'active':''" data-toggle="tab">Niveles académicos</a></li>
+          <li><a routerLink="/school-shift" [ngClass]="(__shiftSegmentFlag)?'active':''" data-toggle="tab">Turnos</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
